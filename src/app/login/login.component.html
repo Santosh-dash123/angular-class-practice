@@ -1,11 +1,27 @@
-<div>
-  <h1 style="color: red">Counter Project</h1>
-  <hr />
-  <h2 style="font-size: 35px; color: blue">{{ num }}</h2>
+<!-- <div>
+  <h1>User Details</h1>
   <br /><br />
-  <div style="font-size: 70px">
-    <button (click)="increment()">Increment</button> &nbsp;
-    <button (click)="decrement()">Decrement</button> &nbsp;
-    <button (click)="reset()">Reset</button>
-  </div>
+  <h2>User Name : {{ user.name }}</h2>
+  <h3>Role : {{ user.role }}</h3>
+  <h2>Status : {{ user.isActive ? "Active" : "InActive" }}</h2>
+</div>
+<br />
+<button (click)="toggleStatus()">Toogle Status</button> -->
+
+<div>
+  <!-- <input type="text" value="{{ name }}" (input)="changeMyName($event)" />
+  <h1>Hii, My name is {{ name }}</h1> -->
+
+  <!-- <input type="text" [(ngModel)]="name" />
+  <h1>Hii, My name is {{ name }}</h1> -->
+
+  <label>Enter First Number</label>
+  <input type="number" [(ngModel)]="firstNumber" (input)="calcSum()" />
+  <br /><br />
+  <label>Enter Second Number</label>
+  <input type="number" [(ngModel)]="secondNumber" (input)="calcSum()" />
+  <!-- <br /><br />
+  <button (click)="calcSum()">Calculate Sum Of Two Number</button> -->
+  <br /><br />
+  <h1>Your Result Is : {{ result }}</h1>
 </div>

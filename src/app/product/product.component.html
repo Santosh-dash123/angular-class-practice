@@ -1,0 +1,87 @@
+<!-- <h2>Online Shopping Cart</h2>
+@for (product of products; track products) {
+  <div
+    style="border: 1px solid gray; padding: 10px; margin: 10px"
+    [ngStyle]="{ backgroundColor: product.inStock ? '#d4edda' : '#f8d7da' }"
+  >
+    <h3>{{ product.name }}</h3>
+    <p>Price : {{ product.price }}</p>
+
+    @if (product.inStock) {
+      <button>Add To Cart</button>
+    } @else {
+      <button disabled>Out Of Stock</button>
+    }
+  </div>
+} -->
+
+<!-- <h2>Ng Class Example</h2>
+<div [ngClass]="marks >= 35 ? 'pass' : 'fail'">Student Marks : {{ marks }}</div> -->
+
+<!-- <h2>Ng Style Example</h2>
+<div
+  style="border: 1px solid gray; padding: 10px; margin: 10px"
+  [ngStyle]="{ backgroundColor: inStock ? '#d4edda' : '#f8d7da' }"
+>
+  <h2>InStock : {{ inStock }}</h2>
+</div>
+<br />
+<button (click)="toggleStock()">Toogle Stock</button> -->
+
+<!-- <h2>If Example</h2>
+
+@if (isLoggedIn && userName == "Santosh") {
+  <h2>Welcome, To Dashboard</h2>
+  <h2>Welcome, Santosh</h2>
+} @else if (isLoggedIn && userName == "Raki") {
+  <h2>Welcome, To Dashboard</h2>
+  <h2>Welcome, Raki</h2>
+} @else {
+  <h2>Back To Login Page</h2>
+} -->
+
+<!-- <h2>For Loop Example</h2>
+
+<table border="1" [cellPadding]="10">
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Department</th>
+    <th>Action</th>
+  </tr>
+  @for (emp of employees; track employees) {
+    <tr>
+      <td>{{ emp.id }}</td>
+      <td>{{ emp.name }}</td>
+      <td>{{ emp.department }}</td>
+      <td>
+        <button (click)="editEmployee(emp.id)">Edit</button>
+        &nbsp;
+        <button (click)="deleteEmployee(emp.id)">Delete</button>
+      </td>
+    </tr>
+  }
+</table> -->
+
+<h2>Switch Case Statement Example</h2>
+
+@switch (grade) {
+  @case ("A") {
+    <h2>A Grade</h2>
+  }
+  @case ("B") {
+    <h2>B Grade</h2>
+  }
+  @case ("C") {
+    <h2>C Grade</h2>
+  }
+  @case ("D") {
+    <h2>D Grade</h2>
+  }
+  @case ("E") {
+    <h2>E Grade</h2>
+  }
+  @default {
+    <h2>Fail</h2>
+  }
+}
