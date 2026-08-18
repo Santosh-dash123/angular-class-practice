@@ -36,12 +36,16 @@
 } @else if (isLoggedIn && userName == "Raki") {
   <h2>Welcome, To Dashboard</h2>
   <h2>Welcome, Raki</h2>
+} @else if (isLoggedIn && userName == "Binayak") {
+  <h2>Welcome, To Dashboard</h2>
+  <h2>Welcome, Binayak</h2>
 } @else {
   <h2>Back To Login Page</h2>
 } -->
 
 <!-- <h2>For Loop Example</h2>
 
+<button (click)="addEmployees()">Add Employees</button>
 <table border="1" [cellPadding]="10">
   <tr>
     <th>Id</th>
@@ -63,7 +67,7 @@
   }
 </table> -->
 
-<h2>Switch Case Statement Example</h2>
+<!-- <h2>Switch Case Statement Example</h2>
 
 @switch (grade) {
   @case ("A") {
@@ -84,4 +88,21 @@
   @default {
     <h2>Fail</h2>
   }
-}
+} -->
+
+<h1>Example Of Pipes</h1>
+<hr />
+<table border="1" [cellPadding]="10">
+  <tr>
+    <th>Product Id</th>
+    <th>Product Name</th>
+    <th>Product Description</th>
+  </tr>
+  @for (product of products; track products) {
+    <tr>
+      <td>{{ product.productId | maskedProductId }}</td>
+      <td>{{ product.productName | uppercase }}</td>
+      <td>{{ product.productDesc | lowercase }}</td>
+    </tr>
+  }
+</table>
