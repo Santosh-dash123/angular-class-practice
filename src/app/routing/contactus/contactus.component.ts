@@ -10,7 +10,6 @@ export class ContactusComponent {
   id: number = 0; //Default Value Of ID
   // constructor(private route: ActivatedRoute) {
   //   this.id = Number(this.route.snapshot.paramMap.get('id'));
-  //   console.log('Id value is : ' + this.id);
   // }
   constructor(private router: ActivatedRoute) {}
 

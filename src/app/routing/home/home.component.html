@@ -1,4 +1,10 @@
 <h1>home works!</h1>
 <br />
-<button (click)="addEmployees()">Add Employees</button>
-<br />
+<!-- <button (click)="addEmployees()">Add Employees</button>
+<br /> -->
+<button
+  [routerLink]="['/employee']"
+  [queryParams]="{ id: 101, name: 'Santosh Dash' }"
+>
+  Go To Santosh Employee Page
+</button>
