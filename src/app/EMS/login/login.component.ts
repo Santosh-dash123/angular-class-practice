@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../auth.service';
 @Component({
   selector: 'app-login',
   imports: [],
@@ -7,10 +8,14 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  constructor(private router: Router) {}
-  isLoggedIn: boolean = false;
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+  ) {}
+
   EMSLogin() {
-    this.isLoggedIn = true;
-    this.router.navigate(['dashboard']);
+    this.authService.login();
+    alert('Login Successfully!');
+    this.router.navigate(['/dashboard']);
   }
 }
