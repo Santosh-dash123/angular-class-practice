@@ -1,0 +1,66 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card registration-card">
+        <div class="card-header form-header">
+          <h3 class="mb-1">User Registration Form</h3>
+        </div>
+        <div class="card-body p-4">
+          <form (ngSubmit)="userRegistration()">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label"> Full Name </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="name"
+                  placeholder="Enter your fullname"
+                  [(ngModel)]="registration.name"
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label"> Email </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="email"
+                  placeholder="Enter your email"
+                  [(ngModel)]="registration.email"
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label"> Phone Number </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="phoneNumber"
+                  maxlength="10"
+                  placeholder="Enter your phoneNumber"
+                  [(ngModel)]="registration.phoneNumber"
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label"> Select Your City </label>
+                <select
+                  class="form-select"
+                  name="city"
+                  [(ngModel)]="registration.city"
+                >
+                  <option value="">-- Select City --</option>
+                  @for (city of cities; track cities) {
+                    <option [value]="city">{{ city }}</option>
+                  }
+                </select>
+              </div>
+            </div>
+            <div class="text-end mt-3">
+              <button type="submit" class="btn btn-outline-primary me-2">
+                Submit Registration
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
