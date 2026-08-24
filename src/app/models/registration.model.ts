@@ -5,3 +5,8 @@ export interface Registration {
   phoneNumber: string;
   city: string; //Dropdown
 }
+
+export interface City {
+  id: number;
+  name: string;
+}

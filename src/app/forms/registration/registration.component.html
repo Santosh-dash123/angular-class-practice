@@ -47,8 +47,8 @@
                   [(ngModel)]="registration.city"
                 >
                   <option value="">-- Select City --</option>
-                  @for (city of cities; track cities) {
-                    <option [value]="city">{{ city }}</option>
+                  @for (city of citieslist; track city.id) {
+                    <option [value]="city.id">{{ city.name }}</option>
                   }
                 </select>
               </div>
