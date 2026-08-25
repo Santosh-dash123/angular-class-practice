@@ -16,6 +16,7 @@ export class RegistrationComponent {
     name: '',
     email: '',
     phoneNumber: '',
+    cityid: 0,
     city: '',
   };
 
@@ -41,8 +42,9 @@ export class RegistrationComponent {
     }
 
     //Get Particular city name using it's id
-    const selectedCity =
-      this.citieslist.find((x) => x.id == Number(this.registration.city)) || '';
+    const selectedCity = this.citieslist.find(
+      (x) => x.id == Number(this.registration.cityid),
+    );
 
     //Generate Id Number
     const newId =
@@ -53,10 +55,62 @@ export class RegistrationComponent {
       name: this.registration.name.trim(),
       email: this.registration.email.trim(),
       phoneNumber: this.registration.phoneNumber.trim(),
-      city: this.registration.city,
+      cityid: this.registration.cityid,
+      city: selectedCity?.name || 'N/A',
     });
 
-    console.log(this.registrationList);
+    Swal.fire({
+      icon: 'success',
+      title: 'User Registered',
+      text: 'User Onboard Successfully!',
+    });
+
+    this.resetForm();
+  }
+
+  resetForm() {
+    this.registration = {
+      id: 0,
+      name: '',
+      email: '',
+      phoneNumber: '',
+      cityid: 0,
+      city: '',
+    };
+  }
+
+  //Method For Edit User
+  editUser(id: number) {
+    alert('Id Is : ' + id);
+  }
+
+  //Method For Delete User
+  deleteUser(id: number): void {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Filter out the deleted user
+        this.registrationList = this.registrationList.filter(
+          (x) => x.id !== id,
+        );
+
+        // Trigger success notification
+        Swal.fire({
+          title: 'Deleted!',
+          text: 'The user has been deleted.',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false,
+        });
+      }
+    });
   }
 
   validateUser(user: Registration): boolean {
@@ -87,8 +141,8 @@ export class RegistrationComponent {
       });
       return false;
     }
-    //Phone Number Required validation
-    if (!user.city.trim()) {
+    //City Required validation
+    if (!user.cityid) {
       Swal.fire({
         icon: 'error',
         title: 'Validation Error',

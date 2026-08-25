@@ -44,9 +44,9 @@
                 <select
                   class="form-select"
                   name="city"
-                  [(ngModel)]="registration.city"
+                  [(ngModel)]="registration.cityid"
                 >
-                  <option value="">-- Select City --</option>
+                  <option value="0">-- Select City --</option>
                   @for (city of citieslist; track city.id) {
                     <option [value]="city.id">{{ city.name }}</option>
                   }
@@ -54,11 +54,80 @@
               </div>
             </div>
             <div class="text-end mt-3">
-              <button type="submit" class="btn btn-outline-primary me-2">
+              <button
+                type="button"
+                (click)="resetForm()"
+                class="btn btn-outline-danger me-2"
+                style="cursor: pointer"
+              >
+                Reset Form
+              </button>
+              <button
+                type="submit"
+                class="btn btn-outline-primary me-2"
+                style="cursor: pointer"
+              >
                 Submit Registration
               </button>
             </div>
           </form>
+        </div>
+      </div>
+      <div class="card mt-2 registration-card">
+        <div class="card-header form-header">
+          <h4 class="mb-1">Registered User</h4>
+        </div>
+        <div class="card-body p-4">
+          @if (registrationList.length === 0) {
+            <div class="text-center">
+              <p>No Users Available</p>
+            </div>
+          }
+          @if (registrationList.length > 0) {
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead class="text-center">
+                  <th>####</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone Number</th>
+                  <th>City</th>
+                  <th>Action</th>
+                </thead>
+                <tbody>
+                  @for (
+                    user of registrationList;
+                    track user.id;
+                    let i = $index
+                  ) {
+                    <tr>
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ user.name }}</td>
+                      <td>{{ user.email }}</td>
+                      <td>{{ user.phoneNumber }}</td>
+                      <td>{{ user.city }}</td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn btn-primary btn-sm me-2"
+                          (click)="editUser(user.id)"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-danger btn-sm me-2"
+                          (click)="deleteUser(user.id)"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          }
         </div>
       </div>
     </div>

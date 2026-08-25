@@ -3,7 +3,8 @@ export interface Registration {
   name: string;
   email: string;
   phoneNumber: string;
-  city: string; //Dropdown
+  cityid: number;
+  city: string;
 }
 
 export interface City {
