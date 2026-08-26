@@ -4,7 +4,7 @@ export interface Registration {
   email: string;
   phoneNumber: string;
   cityid: number;
-  city: string;
+  city: string; //Dropdown
 }
 
 export interface City {

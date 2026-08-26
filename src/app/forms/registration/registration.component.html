@@ -133,3 +133,95 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header form-header">
+        <h3 class="modal-title mb-0">Edit User Details</h3>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form (ngSubmit)="updateUser()">
+        <div class="modal-body p-4">
+          <!-- Hidden ID Field -->
+          <input type="hidden" [(ngModel)]="editRegistration.id" name="id" />
+
+          <div class="row">
+            <!-- Full Name -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Full Name</label>
+              <input
+                type="text"
+                class="class-control form-control"
+                name="name"
+                placeholder="Enter your fullname"
+                [(ngModel)]="editRegistration.name"
+              />
+            </div>
+
+            <!-- Email -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Email</label>
+              <input
+                type="text"
+                class="form-control"
+                name="email"
+                placeholder="Enter your email"
+                [(ngModel)]="editRegistration.email"
+              />
+            </div>
+
+            <!-- Phone Number -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Phone Number</label>
+              <input
+                type="text"
+                class="form-control"
+                name="phoneNumber"
+                maxlength="10"
+                placeholder="Enter your phoneNumber"
+                [(ngModel)]="editRegistration.phoneNumber"
+              />
+            </div>
+
+            <!-- Select Your City -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Select Your City</label>
+              <select
+                class="form-select"
+                name="city"
+                [(ngModel)]="editRegistration.cityid"
+              >
+                <option value="0">-- Select City --</option>
+                @for (city of citieslist; track city.id) {
+                  <option [value]="city.id">{{ city.name }}</option>
+                }
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="btn btn-outline-primary"
+            style="cursor: pointer"
+          >
+            Update
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

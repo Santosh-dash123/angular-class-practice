@@ -10,8 +10,18 @@ import Swal from 'sweetalert2';
   styleUrl: './registration.component.css',
 })
 export class RegistrationComponent {
-  //Form Model
+  //Add Form Model
   registration: Registration = {
+    id: 0,
+    name: '',
+    email: '',
+    phoneNumber: '',
+    cityid: 0,
+    city: '',
+  };
+
+  //Edit Form Model
+  editRegistration: Registration = {
     id: 0,
     name: '',
     email: '',
@@ -33,6 +43,7 @@ export class RegistrationComponent {
     { id: 4, name: 'Jagatsinghpur' },
     { id: 5, name: 'Bhadrak' },
     { id: 6, name: 'Balasore' },
+    { id: 7, name: 'Ganjam' },
   ];
 
   userRegistration() {
@@ -81,9 +92,59 @@ export class RegistrationComponent {
 
   //Method For Edit User
   editUser(id: number) {
-    alert('Id Is : ' + id);
+    if (id > 0) {
+      const user = this.registrationList.find((x) => x.id === id);
+      if (!user) {
+        return;
+      } else {
+        this.editRegistration = { ...user };
+      }
+    }
+
+    const modalElement = document.getElementById('editUserModal');
+    if (modalElement) {
+      const modal = new (window as any).bootstrap.Modal(modalElement);
+      modal.show();
+    }
   }
 
+  //Update User Code
+  updateUser(): void {
+    //Validate All Fields
+    if (!this.validateUser(this.editRegistration)) {
+      return;
+    }
+
+    const index = this.registrationList.findIndex(
+      (x) => x.id === this.editRegistration.id,
+    );
+
+    this.registrationList[index] = {
+      id: this.editRegistration.id,
+      name: this.editRegistration.name,
+      email: this.editRegistration.email,
+      phoneNumber: this.editRegistration.phoneNumber,
+      cityid: this.editRegistration.cityid,
+      city: this.editRegistration.city,
+    };
+    this.closeModal();
+    Swal.fire({
+      icon: 'success',
+      title: 'User Updated',
+      text: 'User Modified Successfully!',
+    });
+  }
+
+  closeModal() {
+    const modalElement = document.getElementById('editUserModal');
+    if (modalElement) {
+      // getOrCreateInstance ensures the instance exists before calling hide
+      const modal = (window as any).bootstrap.Modal.getOrCreateInstance(
+        modalElement,
+      );
+      modal.hide();
+    }
+  }
   //Method For Delete User
   deleteUser(id: number): void {
     Swal.fire({
