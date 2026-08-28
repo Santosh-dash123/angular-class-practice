@@ -58,8 +58,13 @@ export class RegistrationComponent {
     );
 
     //Generate Id Number
+    // const newId =
+    //   this.registrationList.length === 0 ? 1 : this.registrationList.length + 1;
+
     const newId =
-      this.registrationList.length === 0 ? 1 : this.registrationList.length + 1;
+      this.registrationList.length === 0
+        ? 1
+        : Math.max(...this.registrationList.map((x) => x.id)) + 1;
 
     this.registrationList.push({
       id: newId,
@@ -115,6 +120,11 @@ export class RegistrationComponent {
       return;
     }
 
+    //Get Particular city name using it's id
+    const selectedCity = this.citieslist.find(
+      (x) => x.id == Number(this.editRegistration.cityid),
+    );
+
     const index = this.registrationList.findIndex(
       (x) => x.id === this.editRegistration.id,
     );
@@ -125,7 +135,7 @@ export class RegistrationComponent {
       email: this.editRegistration.email,
       phoneNumber: this.editRegistration.phoneNumber,
       cityid: this.editRegistration.cityid,
-      city: this.editRegistration.city,
+      city: selectedCity?.name || 'N/A',
     };
     this.closeModal();
     Swal.fire({
@@ -177,40 +187,60 @@ export class RegistrationComponent {
   validateUser(user: Registration): boolean {
     //Name validation
     if (!user.name.trim()) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Validation Error',
-        text: 'Please enter your name',
-      });
+      this.showError('Please enter your name');
+      return false;
+    }
+    if (user.name.trim().length < 5) {
+      this.showError('User Name Cannot be less than 5 Characters');
+      return false;
+    }
+
+    const namePattern = /^[a-zA-Z\s]+$/; //Regular Expression
+    if (!namePattern.test(user.name.trim())) {
+      this.showError('User name should contain only characters and spaces');
       return false;
     }
     //Email Required validation
     if (!user.email.trim()) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Validation Error',
-        text: 'Please enter your email',
-      });
+      this.showError('Please enter your email');
       return false;
     }
+
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!emailPattern.test(user.email.trim())) {
+      this.showError('Please enter a valid email address');
+      return false;
+    }
+
+    const isEmailExistsBefore = this.registrationList.some(
+      (x) =>
+        x.email.toLocaleLowerCase() === user.email.trim().toLocaleLowerCase() &&
+        x.id !== user.id,
+    );
+    if (isEmailExistsBefore) {
+      this.showError('This email is already registered');
+      return false;
+    }
+
     //Phone Number Required validation
     if (!user.phoneNumber.trim()) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Validation Error',
-        text: 'Please enter your phone number',
-      });
+      this.showError('Please enter your phone number');
       return false;
     }
     //City Required validation
     if (!user.cityid) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Validation Error',
-        text: 'Please select your city',
-      });
+      this.showError('Please select your city');
       return false;
     }
     return true;
+  }
+
+  showError(message: string) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Validation Error',
+      text: message,
+    });
   }
 }
