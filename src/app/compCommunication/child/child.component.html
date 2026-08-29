@@ -1,0 +1,37 @@
+<div>
+  <h2>
+    Product Details (Comming From Child Componet - Parent To Child
+    Communication)
+  </h2>
+  <hr />
+  <table class="table table-stripped table-bordered">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Brand</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (product of products; track product.id) {
+        <tr>
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.brand }}</td>
+          <td>
+            <button
+              type="button"
+              (click)="addToCart(product)"
+              class="btn btn-outline-primary"
+            >
+              Add To Cart
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

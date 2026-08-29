@@ -1,0 +1,7 @@
+<div>
+  <h1>Your Cart Count : {{ cartProducts.length }}</h1>
+  <app-child
+    [products]="products"
+    (addToCartEvent)="addToCart($event)"
+  ></app-child>
+</div>
