@@ -22,16 +22,29 @@
           <td>{{ product.price }}</td>
           <td>{{ product.brand }}</td>
           <td>
-            <button
-              type="button"
-              (click)="addToCart(product)"
-              class="btn btn-outline-primary"
-            >
-              Add To Cart
-            </button>
+            @if (isProductInCart(product.id)) {
+              <button
+                type="button"
+                disabled
+                (click)="addToCart(product)"
+                class="btn btn-outline-primary"
+              >
+                Add To Cart
+              </button>
+            } @else {
+              <button
+                type="button"
+                (click)="addToCart(product)"
+                class="btn btn-outline-primary"
+              >
+                Add To Cart
+              </button>
+            }
           </td>
         </tr>
       }
     </tbody>
   </table>
 </div>
+
+<h1>Name : {{ name }}</h1>

@@ -7,6 +7,8 @@ import { ParentComponent } from './compCommunication/parent/parent.component';
 // import { RouterLink } from '@angular/router';
 // import { RegistrationComponent } from './forms/registration/registration.component';
 
+//import { LifeCycleComponent } from './AngLifeCycle/life-cycle/life-cycle.component';
+
 @Component({
   selector: 'name-root',
   imports: [ParentComponent],

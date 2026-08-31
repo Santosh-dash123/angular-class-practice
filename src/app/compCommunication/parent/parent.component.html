@@ -1,7 +1,15 @@
-<div>
+<div class="mb-5">
   <h1>Your Cart Count : {{ cartProducts.length }}</h1>
+
   <app-child
     [products]="products"
     (addToCartEvent)="addToCart($event)"
-  ></app-child>
+    [cartProducts]="cartProducts"
+    [name]="userName"
+  >
+  </app-child>
+</div>
+
+<div>
+  <button (click)="changeName()">Change Name</button>
 </div>

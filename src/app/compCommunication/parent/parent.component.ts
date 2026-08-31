@@ -15,11 +15,24 @@ export class ParentComponent {
     { id: 104, name: 'Smart TV', price: 45000, brand: 'Sony' },
     { id: 105, name: 'Microwave Oven', price: 12000, brand: 'IFB' },
     { id: 106, name: 'Water Purifier', price: 15000, brand: 'Kent' },
+    { id: 107, name: 'Fan', price: 2700, brand: 'Usha' },
   ];
 
   cartProducts: any[] = [];
   addToCart(product: any) {
-    this.cartProducts.push(product);
-    console.log('Product Addedd - ', product);
+    const productAlreadyAddedToCart = this.cartProducts.some(
+      (x) => x.id === product.id,
+    );
+    if (productAlreadyAddedToCart) {
+      return true;
+    } else {
+      this.cartProducts.push(product);
+    }
+    return false;
+  }
+
+  userName: string = 'Santosh Dash';
+  changeName(): void {
+    this.userName = 'Binayak';
   }
 }
