@@ -1,0 +1,20 @@
+<table class="table table-bordered">
+  <thead>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Category</th>
+    <th>In Stock</th>
+  </thead>
+  <tbody>
+    @for (pd of product; track pd.id) {
+      <tr>
+        <td>{{ pd.id }}</td>
+        <td>{{ pd.name }}</td>
+        <td>{{ pd.price }}</td>
+        <td>{{ pd.category }}</td>
+        <td>{{ pd.inStock }}</td>
+      </tr>
+    }
+  </tbody>
+</table>

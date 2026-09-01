@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ParentComponent } from './compCommunication/parent/parent.component';
+//import { ParentComponent } from './compCommunication/parent/parent.component';
 // import { HomeComponent } from './routing/home/home.component';
 //import { LoginComponent } from './login/login.component';
 // import { ProductComponent } from './product/product.component';
@@ -9,9 +9,11 @@ import { ParentComponent } from './compCommunication/parent/parent.component';
 
 //import { LifeCycleComponent } from './AngLifeCycle/life-cycle/life-cycle.component';
 
+import { ServiceComponent } from './services/service/service.component';
+
 @Component({
   selector: 'name-root',
-  imports: [ParentComponent],
+  imports: [ServiceComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
