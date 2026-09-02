@@ -9,11 +9,13 @@ import { Component } from '@angular/core';
 
 //import { LifeCycleComponent } from './AngLifeCycle/life-cycle/life-cycle.component';
 
-import { ServiceComponent } from './services/service/service.component';
+// import { ServiceComponent } from './services/service/service.component';
+
+import { PostComponent } from './DUMMYAPI/Component/post/post.component';
 
 @Component({
   selector: 'name-root',
-  imports: [ServiceComponent],
+  imports: [PostComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

@@ -13,7 +13,7 @@ export class ServiceComponent implements OnInit {
   product: Product[] = [];
 
   // constructor(private masterService: MasterService) {}
-
+  //constructor(private productService: ProductService){}
   productdata = inject(ProductService);
 
   ngOnInit(): void {
