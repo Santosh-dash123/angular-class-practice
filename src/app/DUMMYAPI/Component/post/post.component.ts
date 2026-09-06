@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Post } from '../../Model/post.model';
 import { PostService } from '../../Service/post.service';
 import Swal from 'sweetalert2';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-post',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css',
 })
@@ -39,6 +40,9 @@ export class PostComponent implements OnInit {
   }
 
   getPostById(id: number): void {
+    if (id == null) {
+      Swal.fire('Id null', 'Id Cannot be null', 'info');
+    }
     this.postService.getPostById(id).subscribe({
       next: (response) => {
         console.log('Post Data : - ', response);
@@ -52,7 +56,7 @@ export class PostComponent implements OnInit {
       next: (response) => {
         console.log('Created Post - ', response);
         Swal.fire('Success', 'Post added successfully!', 'success');
-
+        this.posts.unshift(response);
         this.post = {
           title: '',
           body: '',

@@ -1,0 +1,41 @@
+<h2>Create Department</h2>
+
+<form [formGroup]="departmentForm" (ngSubmit)="onSubmit()">
+  <label>Department Name</label>
+  <input
+    type="text"
+    formControlName="departmentName"
+    placeholder="Enter your department name"
+  />
+  @if (
+    departmentForm.get("departmentName")?.touched &&
+    departmentForm.get("departmentName")?.invalid
+  ) {
+    <div style="color: red">Department Name Is Required!</div>
+  }
+  <br />
+  <button type="submit">Create Departmemt</button>
+</form>
+
+<hr />
+
+<h2>Departmemt List</h2>
+
+<table border="1">
+  <thead>
+    <th>Id</th>
+    <th>Departmemt Name</th>
+    <th>Active</th>
+    <th>Created By</th>
+  </thead>
+  <tbody>
+    @for (department of departments; track department.id) {
+      <tr>
+        <td>{{ department.id }}</td>
+        <td>{{ department.departmentName }}</td>
+        <td>{{ department.isActive }}</td>
+        <td>{{ department.createdBy }}</td>
+      </tr>
+    }
+  </tbody>
+</table>

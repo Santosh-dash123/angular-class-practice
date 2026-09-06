@@ -11,11 +11,11 @@ import { Component } from '@angular/core';
 
 // import { ServiceComponent } from './services/service/service.component';
 
-import { PostComponent } from './DUMMYAPI/Component/post/post.component';
-
+//import { PostComponent } from './DUMMYAPI/Component/post/post.component';
+import { DepartmentComponent } from './DeptMstPage/Component/department/department.component';
 @Component({
   selector: 'name-root',
-  imports: [PostComponent],
+  imports: [DepartmentComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
