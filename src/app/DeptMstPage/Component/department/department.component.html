@@ -1,41 +1,231 @@
-<h2>Create Department</h2>
+<div class="container-fluid py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="fw-bold mb-1">Department Master</h2>
 
-<form [formGroup]="departmentForm" (ngSubmit)="onSubmit()">
-  <label>Department Name</label>
-  <input
-    type="text"
-    formControlName="departmentName"
-    placeholder="Enter your department name"
-  />
-  @if (
-    departmentForm.get("departmentName")?.touched &&
-    departmentForm.get("departmentName")?.invalid
-  ) {
-    <div style="color: red">Department Name Is Required!</div>
-  }
-  <br />
-  <button type="submit">Create Departmemt</button>
-</form>
+      <p class="text-muted mb-0">Manage your organization departments</p>
+    </div>
+  </div>
 
-<hr />
+  <div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-primary text-white py-3">
+      <h5 class="mb-0">
+        <i class="bi bi-building me-2"></i>
+        Create Department
+      </h5>
+    </div>
 
-<h2>Departmemt List</h2>
+    <div class="card-body">
+      <form [formGroup]="departmentForm" (ngSubmit)="onSubmit()">
+        <div class="row align-items-end">
+          <!-- Department Name -->
 
-<table border="1">
-  <thead>
-    <th>Id</th>
-    <th>Departmemt Name</th>
-    <th>Active</th>
-    <th>Created By</th>
-  </thead>
-  <tbody>
-    @for (department of departments; track department.id) {
-      <tr>
-        <td>{{ department.id }}</td>
-        <td>{{ department.departmentName }}</td>
-        <td>{{ department.isActive }}</td>
-        <td>{{ department.createdBy }}</td>
-      </tr>
-    }
-  </tbody>
-</table>
+          <div class="col-md-8 mb-3 mb-md-0">
+            <label class="form-label fw-semibold">
+              Department Name
+              <span class="text-danger">*</span>
+            </label>
+
+            <input
+              type="text"
+              class="form-control"
+              formControlName="departmentName"
+              placeholder="Enter department name"
+              [class.is-invalid]="
+                departmentForm.get('departmentName')?.touched &&
+                departmentForm.get('departmentName')?.invalid
+              "
+            />
+
+            <!-- Validation -->
+
+            @if (
+              departmentForm.get("departmentName")?.touched &&
+              departmentForm.get("departmentName")?.hasError("required")
+            ) {
+              <div class="invalid-feedback">Department name is required.</div>
+            }
+
+            @if (
+              departmentForm.get("departmentName")?.touched &&
+              departmentForm.get("departmentName")?.hasError("minlength")
+            ) {
+              <div class="invalid-feedback">
+                Department name must contain at least 3 characters.
+              </div>
+            }
+          </div>
+
+          <!-- Create Button -->
+
+          <div class="col-md-4">
+            <button type="submit" class="btn btn-primary w-100">
+              <i class="bi bi-plus-circle me-2"></i>
+
+              Create Department
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="card shadow-sm border-0">
+    <div
+      class="card-header bg-white d-flex justify-content-between align-items-center py-3"
+    >
+      <div>
+        <h5 class="mb-0 fw-bold">Department List</h5>
+
+        <small class="text-muted">
+          Total Departments:
+          {{ departments.length }}
+        </small>
+      </div>
+    </div>
+
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover table-bordered align-middle mb-0">
+          <!-- TABLE HEADER -->
+
+          <thead class="table-light">
+            <tr>
+              <th class="text-center">#</th>
+
+              <th>Department Name</th>
+
+              <th class="text-center">Status</th>
+
+              <th class="text-center">Created By</th>
+
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+
+          <!-- TABLE BODY -->
+
+          <tbody>
+            @for (
+              department of departments;
+              track department.id;
+              let i = $index
+            ) {
+              <tr>
+                <!-- Serial Number -->
+
+                <td class="text-center">
+                  {{ i + 1 }}
+                </td>
+
+                <!-- Department Name -->
+
+                <td>
+                  <span class="fw-semibold">
+                    {{ department.departmentName }}
+                  </span>
+                </td>
+
+                <!-- Status -->
+
+                <td class="text-center">
+                  @if (department.isActive) {
+                    <span class="badge bg-success">
+                      <i class="bi bi-check-circle me-1"></i>
+                      Active
+                    </span>
+                  } @else {
+                    <span class="badge bg-danger">
+                      <i class="bi bi-x-circle me-1"></i>
+                      Inactive
+                    </span>
+                  }
+                </td>
+
+                <!-- Created By -->
+
+                <td class="text-center">
+                  {{ department.createdBy }}
+                </td>
+
+                <!-- ACTION -->
+
+                <td class="text-center">
+                  <div class="btn-group">
+                    <!-- EDIT -->
+
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-outline-primary"
+                      title="Edit Department"
+                      data-bs-toggle="modal"
+                      data-bs-target="#updateDepartmentModal"
+                      (click)="getParticularDept(department.id!)"
+                    >
+                      <i class="bi bi-pencil-square"></i>
+                    </button>
+
+                    <!-- DELETE -->
+
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-outline-danger"
+                      title="Delete Department"
+                    >
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+
+            <!-- NO DATA -->
+
+            @if (departments.length === 0) {
+              <tr>
+                <td colspan="5" class="text-center py-5">
+                  <div class="text-muted">
+                    <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+
+                    <h6>No departments found</h6>
+
+                    <small> Create your first department. </small>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="updateDepartmentModal"
+  tabindex="-1"
+  aria-labelledby="updateDepartmentModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- MODAL HEADER -->
+
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="updateDepartmentModalLabel">
+          <i class="bi bi-pencil-square me-2"></i>
+
+          Update Department
+        </h5>
+
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+    </div>
+  </div>
+</div>

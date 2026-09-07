@@ -20,4 +20,21 @@ export class DepartmentService {
   saveDepartment(data: Department): Observable<any> {
     return this.http.post(`${API_CONFIG.POST_BASE_URL}`, data);
   }
+
+  //Get Particular department by id
+  getDepartmentById(id: number): Observable<DepartmentResponse> {
+    return this.http.get<DepartmentResponse>(
+      `${API_CONFIG.GET_BASE_URL}?id=${id}`,
+    );
+  }
+
+  //Update Department
+  updateDepartment(data: Department): Observable<any> {
+    return this.http.post(`${API_CONFIG.UPDATE_BASE_URL}`, data);
+  }
+
+  //Delete Department
+  deleteDepartment(id: number): Observable<any> {
+    return this.http.post(`${API_CONFIG.DELETE_BASE_URL}/${id}`, null);
+  }
 }
