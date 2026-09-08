@@ -106,4 +106,79 @@ export class DepartmentComponent implements OnInit {
       },
     });
   }
+
+  onUpdate(): void {
+    if (this.updateForm.invalid) {
+      this.updateForm.markAllAsTouched();
+      return;
+    }
+
+    const department: Department = {
+      id: this.updateForm.value.id,
+      tenantId: 1,
+      departmentName: this.updateForm.value.departmentName,
+      isActive: this.updateForm.value.isActive,
+      createdBy: this.updateForm.value.createdBy,
+      modifiedBy: 1,
+    };
+
+    this.deptService.updateDepartment(department).subscribe({
+      next: (response) => {
+        if (response.success) {
+          Swal.fire('Updated!', 'Department updated successfully!', 'success');
+          this.updateForm.reset();
+          this.getDepartments();
+        }
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
+
+  onDelete(id: number): void {
+    if (!id || id <= 0) {
+      Swal.fire('Error!', 'Invalid department ID selected.', 'error');
+      return;
+    }
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.deptService.deleteDepartment(id).subscribe({
+          next: (response) => {
+            if (response && response.success) {
+              Swal.fire(
+                'Deleted!',
+                'Department has been deleted successfully.',
+                'success',
+              );
+              this.getDepartments();
+            } else {
+              Swal.fire(
+                'Failed!',
+                response?.message || 'Could not delete the department.',
+                'error',
+              );
+            }
+          },
+          error: (error) => {
+            console.error('Delete department error:', error);
+            Swal.fire(
+              'Error!',
+              'An error occurred while deleting the department.',
+              'error',
+            );
+          },
+        });
+      }
+    });
+  }
 }

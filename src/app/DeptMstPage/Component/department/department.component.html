@@ -171,6 +171,7 @@
                       type="button"
                       class="btn btn-sm btn-outline-danger"
                       title="Delete Department"
+                      (click)="onDelete(department.id!)"
                     >
                       <i class="bi bi-trash"></i>
                     </button>
@@ -225,6 +226,57 @@
           data-bs-dismiss="modal"
           aria-label="Close"
         ></button>
+      </div>
+
+      <!-- MODAL BODY -->
+      <div class="modal-body">
+        <form [formGroup]="updateForm" (ngSubmit)="onUpdate()">
+          <input type="hidden" formControlName="id" />
+
+          <div class="mb-3">
+            <label class="form-label">Department Name</label>
+            <span class="text-danger">*</span>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="departmentName"
+              placeholder="Enter your department name"
+              [class.is-invalid]="
+                updateForm.get('departmentName')?.touched &&
+                updateForm.get('departmentName')?.invalid
+              "
+            />
+            <!-- Validation -->
+
+            @if (
+              updateForm.get("departmentName")?.touched &&
+              updateForm.get("departmentName")?.hasError("required")
+            ) {
+              <div class="invalid-feedback">Department name is required.</div>
+            }
+
+            @if (
+              updateForm.get("departmentName")?.touched &&
+              updateForm.get("departmentName")?.hasError("minlength")
+            ) {
+              <div class="invalid-feedback">
+                Department name must contain at least 3 characters.
+              </div>
+            }
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Status</label>
+            <select class="form-select" formControlName="isActive">
+              <option [ngValue]="true">Active</option>
+              <option [ngValue]="false">InActive</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-outline-primary">
+            Update Department
+          </button>
+        </form>
       </div>
     </div>
   </div>

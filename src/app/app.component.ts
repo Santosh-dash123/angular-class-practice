@@ -12,10 +12,12 @@ import { Component } from '@angular/core';
 // import { ServiceComponent } from './services/service/service.component';
 
 //import { PostComponent } from './DUMMYAPI/Component/post/post.component';
-import { DepartmentComponent } from './DeptMstPage/Component/department/department.component';
+//import { DepartmentComponent } from './DeptMstPage/Component/department/department.component';
+
+import { SignalComponent } from './StateManagement/signal/signal.component';
 @Component({
   selector: 'name-root',
-  imports: [DepartmentComponent],
+  imports: [SignalComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
