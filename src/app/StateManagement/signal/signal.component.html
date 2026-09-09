@@ -1,10 +1,12 @@
+<!-- Signal Example -->
+
 <!-- <h1 class="text-center">{{ count }}</h1> -->
 
-<h1 class="text-center">{{ count() }}</h1>
+<!-- <h1 class="text-center">{{ count() }}</h1> -->
 
 <!-- <button (click)="setCount()">Set Count</button> -->
 
-<div class="d-flex justify-content-center align-items-center gap-3">
+<!-- <div class="d-flex justify-content-center align-items-center gap-3">
   <button class="btn btn-outline-primary" (click)="increaseCount()">
     Increase
   </button>
@@ -14,4 +16,40 @@
   <button class="btn btn-outline-danger" (click)="decreaseCount()">
     Decrease
   </button>
-</div>
+</div> -->
+
+<!-- @if (isLoggedIn()) {
+  <h3>Welcome User!</h3>
+  <button (click)="logout()" class="btn btn-outline-primary">Logout</button>
+} @else {
+  <h3>Please Login</h3>
+  <button (click)="login()" class="btn btn-outline-danger">Login</button>
+} -->
+
+<!-- Computed Example -->
+
+<!-- <h1>Count : {{ count() }}</h1>
+<h1>Double Count : {{ doubleCount() }}</h1>
+
+<button (click)="increaseCount()">Increase Count Value</button> -->
+
+<!-- <h2>E Cart</h2>
+<p>Product Price : {{ productPrice() | currency }}</p>
+<p>Quantity : {{ quantity() }}</p>
+<p>Total Price : {{ totalPrice() }}</p>
+
+<button (click)="increaseQuantity()" class="btn btn-outline-primary">
+  Increase Quantity
+</button>
+<button (click)="decreaseQuantity()" class="btn btn-outline-danger">
+  Decrease Quantity
+</button> -->
+
+<h2>Active Employees</h2>
+<ul>
+  @for (employee of activeEmployees(); track employee.name) {
+    <li>
+      {{ employee.name }}
+    </li>
+  }
+</ul>

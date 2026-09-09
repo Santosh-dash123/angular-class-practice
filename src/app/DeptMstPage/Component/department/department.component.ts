@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { DepartmentService } from '../../Service/department.service';
 import {
   FormControl,
@@ -21,6 +21,8 @@ export class DepartmentComponent implements OnInit {
   updateForm!: FormGroup; //Update Department Form
 
   departments: Department[] = [];
+
+  isLoading = signal(false);
 
   constructor(private deptService: DepartmentService) {}
 
@@ -48,10 +50,12 @@ export class DepartmentComponent implements OnInit {
   }
 
   getDepartments(): void {
+    this.isLoading.set(true);
     this.deptService.getDepartments().subscribe((response) => {
       if (response.success) {
         this.departments = response.data;
       }
+      this.isLoading.set(false);
     });
   }
 
@@ -60,7 +64,7 @@ export class DepartmentComponent implements OnInit {
       this.departmentForm.markAllAsTouched();
       return;
     }
-
+    this.isLoading.set(true);
     const department: Department = {
       tenantId: 1,
       departmentName: this.departmentForm.value.departmentName,
@@ -77,6 +81,7 @@ export class DepartmentComponent implements OnInit {
         );
         this.departmentForm.reset();
         this.getDepartments();
+        this.isLoading.set(false);
       }
     });
   }
